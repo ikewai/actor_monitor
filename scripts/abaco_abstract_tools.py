@@ -1,6 +1,9 @@
 # A handful of abstract tools for interacting with abaco on Tapis' infrastructure.
 
+from agavepy import Agave
 from agavepy import actors
+
+API_SERVER = 'https://api.tacc.utexas.edu'    
 
 def update_actor(actorId: str, tapis_token: str) -> int:
     """
@@ -13,9 +16,12 @@ def update_actor(actorId: str, tapis_token: str) -> int:
     Returns:
         0 on success, 1 on fail
     """
-    
-    actor_body = actors.get(actorId=actorId)
-    actors.update(actorId=actorId, body=actor_body)
+    ag = Agave(
+        api_server=API_SERVER,
+        token=tapis_token
+    )
+    actor_body = ag.actors.get(actorId=actorId)
+    ag.actors.update(actorId=actorId, body=actor_body)
 
     # TODO parse response
     return 0
