@@ -11,6 +11,6 @@ RUN apt install python3 python3-pip -y
 RUN pip3 install --upgrade pip
 RUN pip3 install tapipy
 
-COPY ./scripts/* scripts/.
+COPY ./scripts/* scripts/
 
 CMD [ "/bin/python3", "/usr/src/app/scripts/monitor.py"]
